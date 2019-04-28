@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent"
+    tools:context=".screen.welcome.WelcomeFragment">
+
+
+  <TextView
+      android:id="@+id/btnSettings"
+      android:layout_width="0dp"
+      android:layout_height="56dp"
+      android:text="@string/proceed_to_settings"
+      android:textSize="18sp"
+      android:textColor="@color/white_FFFFFF"
+      android:gravity="center"
+      android:background="?selectableItemBackground"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"/>
+
+  <TextView
+      android:id="@+id/tvHint"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:text="@string/welcome_hint"
+      android:textAlignment="center"
+      android:textColor="@color/white_FFFFFF"
+      android:paddingStart="32dp"
+      android:paddingEnd="32dp"
+      app:layout_constraintBottom_toTopOf="@+id/btnSettings"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

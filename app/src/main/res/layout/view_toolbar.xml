@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="56dp">
+
+  <androidx.constraintlayout.widget.ConstraintLayout
+      android:layout_width="match_parent"
+      android:layout_height="56dp"
+      android:background="@color/colorPrimary">
+
+    <FrameLayout
+        android:id="@+id/btnNavWrapper"
+        android:layout_width="wrap_content"
+        android:layout_height="56dp"
+        android:minWidth="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+      <ImageView
+          android:id="@+id/btnNav"
+          android:layout_width="56dp"
+          android:layout_height="56dp"
+          android:background="?selectableItemBackgroundBorderless"
+          android:scaleType="center"
+          android:visibility="gone"/>
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/btnOptionalWrapper"
+        android:layout_width="wrap_content"
+        android:layout_height="56dp"
+        android:minWidth="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+      <ImageView
+          android:id="@+id/btnOptional"
+          android:layout_width="56dp"
+          android:layout_height="56dp"
+          android:background="?selectableItemBackgroundBorderless"
+          android:scaleType="center"
+          android:visibility="gone"/>
+
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="0dp"
+        android:layout_height="56dp"
+        android:includeFontPadding="false"
+        android:gravity="center_vertical"
+        android:textColor="@color/white_FFFFFF"
+        android:textSize="18sp"
+        android:maxLines="1"
+        android:ellipsize="end"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btnOptionalWrapper"
+        app:layout_constraintStart_toEndOf="@+id/btnNavWrapper"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Title"/>
+
+  </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

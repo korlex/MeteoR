@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <declare-styleable name="Toolbar">
+    <attr name="titleText" format="string"/>
+    <attr name="navBtn" format="reference"/>
+    <attr name="optionalBtn" format="reference"/>
+  </declare-styleable>
+
+  <declare-styleable name="SearchToolbar">
+    <attr name="hintText" format="string"/>
+  </declare-styleable>
+</resources>

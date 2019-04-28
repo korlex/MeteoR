@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white_FFFFFF"
+    tools:context=".screen.settings.location.LocationFragment">
+
+  <com.github.korlex.meteor.view.SearchToolbar
+      android:id="@+id/searchToolbar"
+      android:layout_width="match_parent"
+      android:layout_height="56dp"
+      app:hintText="@string/search_hint"
+      app:cardElevation="4dp"/>
+
+  <androidx.recyclerview.widget.RecyclerView
+      android:id="@+id/rvLocations"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layout_marginTop="56dp"
+      android:clipToPadding="false"
+      android:paddingTop="16dp"
+      android:paddingBottom="88dp"
+      android:visibility="gone" />
+
+  <androidx.appcompat.widget.AppCompatButton
+      android:id="@+id/btnApply"
+      android:layout_width="match_parent"
+      android:layout_height="56dp"
+      android:layout_gravity="bottom"
+      android:layout_margin="16dp"
+      android:text="@string/apply"
+      android:textColor="@color/white_FFFFFF"
+      android:textSize="18sp"
+      app:backgroundTint="@color/colorPrimaryDark"/>
+
+  <ProgressBar
+      android:id="@+id/pbLoading"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center"
+      android:visibility="gone"/>
+
+  <include
+      layout="@layout/layout_search_placeholder"
+      android:id="@+id/layoutPlaceholder"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center"
+      android:visibility="visible"/>
+
+
+  <include
+      android:id="@+id/layoutMessage"
+      layout="@layout/layout_message"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center"
+      android:visibility="gone" />
+
+
+</FrameLayout>
