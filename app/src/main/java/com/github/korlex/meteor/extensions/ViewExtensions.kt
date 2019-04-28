@@ -8,11 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 
-inline fun <reified T : View> ViewGroup.inflate(@LayoutRes layoutRes: Int, attachToRoot: Boolean = false): T {
-  return LayoutInflater.from(context).inflate(layoutRes, this, attachToRoot) as T
-}
-
-fun View.fadeIn(startAnimation: Boolean = true): Animator {
+fun View.fadeIn(startAnimation: Boolean = true) {
   val animator = ObjectAnimator.ofFloat(this, View.ALPHA, 1f)
   animator.addListener(object : AnimatorListenerAdapter() {
     override fun onAnimationStart(animation: Animator?) {
@@ -23,12 +19,9 @@ fun View.fadeIn(startAnimation: Boolean = true): Animator {
   if (startAnimation) {
     animator.start()
   }
-  return animator
 }
 
-fun View.fadeOut(hiddenVisibility: Int = View.GONE, startAnimation: Boolean = true): Animator? {
-  if (visibility != View.VISIBLE) return null
-
+fun View.fadeOut(hiddenVisibility: Int = View.GONE, startAnimation: Boolean = true) {
   val animator = ObjectAnimator.ofFloat(this, View.ALPHA, 0f)
   animator.addListener(object : AnimatorListenerAdapter() {
     override fun onAnimationEnd(animation: Animator?) {
@@ -39,5 +32,4 @@ fun View.fadeOut(hiddenVisibility: Int = View.GONE, startAnimation: Boolean = tr
   if (startAnimation) {
     animator.start()
   }
-  return animator
 }

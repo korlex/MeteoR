@@ -50,7 +50,7 @@
         android:textColorHint="@color/white_FFFFFF"
         android:textSize="18sp"
         android:visibility="visible"
-        android:textCursorDrawable="@color/white_FFFFFF"
+        android:textCursorDrawable="@drawable/et_cursor"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btnClear"
         app:layout_constraintStart_toEndOf="@+id/btnSearch"

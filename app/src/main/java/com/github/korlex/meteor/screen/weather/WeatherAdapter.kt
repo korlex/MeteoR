@@ -1,11 +1,11 @@
 package com.github.korlex.meteor.screen.weather
 
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.github.korlex.meteor.R
-import com.github.korlex.meteor.extensions.inflate
 import com.github.korlex.meteor.screen.weather.model.DateItem
 import com.github.korlex.meteor.screen.weather.model.ForecastItem
 import kotlinx.android.synthetic.main.item_date.view.tvDate
@@ -14,12 +14,9 @@ import kotlinx.android.synthetic.main.item_forecast.view.tvCondition
 import kotlinx.android.synthetic.main.item_forecast.view.tvMaxTemp
 import kotlinx.android.synthetic.main.item_forecast.view.tvMinTemp
 import kotlinx.android.synthetic.main.item_forecast.view.tvTime
-import org.threeten.bp.format.DateTimeFormatter
 
 class WeatherAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-//  private val dateFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("d MMMM")
-//  private val timeFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("hh:mm")
   var weatherItems: List<Any> = ArrayList()
     set(value) {
       field = value
@@ -33,8 +30,8 @@ class WeatherAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
   }
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder = when(viewType) {
-    FORECAST -> ForecastViewHolder(parent.inflate(R.layout.item_forecast, false))
-    DATE     -> DateViewHolder(parent.inflate(R.layout.item_date, false))
+    FORECAST -> ForecastViewHolder(getView(parent, R.layout.item_forecast))
+    DATE     -> DateViewHolder(getView(parent, R.layout.item_date))
     else     -> throw IllegalArgumentException("ViewHolder cant be created. Wrong item type")
   }
 
@@ -46,6 +43,9 @@ class WeatherAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
       is DateViewHolder     -> holder.bind(weatherItems[position] as DateItem)
     }
   }
+
+  private fun getView(parent: ViewGroup, layoutId: Int) =
+    LayoutInflater.from(parent.context).inflate(layoutId, parent, false)
 
   private fun getIcon(iconId: Int): Int = when(iconId) {
     in 200..232 -> R.drawable.ic_thunderstorm

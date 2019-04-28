@@ -26,15 +26,15 @@
       android:visibility="gone" />
 
   <androidx.appcompat.widget.AppCompatButton
-      android:id="@+id/btnApply"
-      android:layout_width="match_parent"
-      android:layout_height="56dp"
-      android:layout_gravity="bottom"
-      android:layout_margin="16dp"
-      android:text="@string/apply"
-      android:textColor="@color/white_FFFFFF"
-      android:textSize="18sp"
-      app:backgroundTint="@color/colorPrimaryDark"/>
+          android:id="@+id/btnApply"
+          android:layout_width="match_parent"
+          android:layout_height="56dp"
+          android:layout_gravity="bottom"
+          android:layout_margin="16dp"
+          android:text="@string/apply"
+          android:textColor="@color/white_FFFFFF"
+          android:textSize="18sp"
+          app:backgroundTint="@color/colorPrimaryDark" android:visibility="gone"/>
 
   <ProgressBar
       android:id="@+id/pbLoading"

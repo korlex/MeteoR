@@ -92,7 +92,7 @@ class WeatherFragment : BaseFragment(), WeatherView {
     }
   }
 
-  fun setUpProgress() {
+  private fun setUpProgress() {
     pbLoading.indeterminateDrawable.setColorFilter(
         ContextCompat.getColor(fetchActivity(), R.color.colorPrimaryDark),
         PorterDuff.Mode.SRC_IN)
