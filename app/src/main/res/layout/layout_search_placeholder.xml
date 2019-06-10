@@ -7,32 +7,30 @@
 
   <TextView
       android:id="@+id/textView2"
-      android:layout_width="wrap_content"
+      android:layout_width="0dp"
       android:layout_height="wrap_content"
-      android:layout_marginTop="8dp"
+      android:layout_marginTop="16dp"
       android:text="@string/search_placeholder"
-      android:textColor="@color/gray_8c8c8c"
-      android:textSize="16sp"
       android:textAlignment="center"
+      android:textColor="@color/gray_b3b3b3"
+      android:textSize="16sp"
       app:layout_constraintBottom_toBottomOf="parent"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintHorizontal_bias="0.5"
-      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintEnd_toEndOf="@+id/imageView"
+      app:layout_constraintStart_toStartOf="@+id/imageView"
       app:layout_constraintTop_toBottomOf="@+id/imageView"/>
+
   <ImageView
       android:id="@+id/imageView"
       android:layout_width="0dp"
-      android:layout_height="0dp"
-      android:layout_marginBottom="8dp"
-      android:contentDescription="TODO"
+      android:layout_height="120dp"
+      android:layout_marginEnd="80dp"
+      android:layout_marginStart="80dp"
+      android:tint="@color/gray_b3b3b3"
       app:layout_constraintBottom_toTopOf="@+id/textView2"
-      app:layout_constraintDimensionRatio="1:1"
-      app:layout_constraintEnd_toEndOf="@+id/textView2"
-      app:layout_constraintHorizontal_bias="0.5"
-      app:layout_constraintHorizontal_chainStyle="packed"
-      app:layout_constraintStart_toStartOf="@+id/textView2"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
       app:layout_constraintVertical_chainStyle="packed"
-      app:srcCompat="@drawable/ic_city"/>
+      app:srcCompat="@drawable/ic_loc_world"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

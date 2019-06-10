@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white_FFFFFF"
+    tools:context=".screen.settings.color.ColorFragment">
+
+  <com.github.korlex.meteor.view.Toolbar
+      android:id="@+id/toolbar"
+      android:layout_width="match_parent"
+      android:layout_height="56dp"
+      app:titleText="@string/color_scheme"
+      app:navBtn="@drawable/ic_back"/>
+
+  <androidx.core.widget.NestedScrollView
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:paddingTop="8dp"
+      android:paddingBottom="8dp"
+      android:clipToPadding="false"
+      android:layout_marginTop="56dp">
+
+    <LinearLayout
+        android:id="@+id/colorsWrapper"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+      <FrameLayout
+          android:id="@+id/btnBlue"
+          android:layout_width="match_parent"
+          android:layout_height="48dp"
+          android:background="?selectableItemBackground"
+          android:paddingLeft="16dp"
+          android:paddingRight="16dp"
+          android:tag="ocean_blue">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center_vertical"
+            android:tint="@color/colorPrimary"
+            app:srcCompat="@drawable/shape_circle"/>
+
+        <TextView
+            android:id="@+id/tvBlueTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="40dp"
+            android:text="@string/blue"
+            android:textColor="@color/selectable_txt2"
+            android:textSize="16sp"/>
+
+      </FrameLayout>
+
+      <FrameLayout
+          android:id="@+id/btnGreen"
+          android:layout_width="match_parent"
+          android:layout_height="48dp"
+          android:background="?selectableItemBackground"
+          android:paddingLeft="16dp"
+          android:paddingRight="16dp"
+          android:tag="forest_green">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center_vertical"
+            android:tint="@color/forestGreenColorPrimary"
+            app:srcCompat="@drawable/shape_circle"/>
+
+        <TextView
+            android:id="@+id/tvGreenTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="40dp"
+            android:text="@string/green"
+            android:textColor="@color/selectable_txt2"
+            android:textSize="16sp"/>
+
+      </FrameLayout>
+
+      <FrameLayout
+          android:id="@+id/btnRed"
+          android:layout_width="match_parent"
+          android:layout_height="48dp"
+          android:background="?selectableItemBackground"
+          android:paddingLeft="16dp"
+          android:paddingRight="16dp"
+          android:tag="sunset_red">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center_vertical"
+            android:tint="@color/sunsetRedColorPrimary"
+            app:srcCompat="@drawable/shape_circle"/>
+
+        <TextView
+            android:id="@+id/tvRedTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="40dp"
+            android:text="@string/red"
+            android:textColor="@color/selectable_txt2"
+            android:textSize="16sp"/>
+
+      </FrameLayout>
+
+    </LinearLayout>
+
+  </androidx.core.widget.NestedScrollView>
+
+</FrameLayout>

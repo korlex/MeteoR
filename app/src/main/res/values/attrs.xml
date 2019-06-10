@@ -9,4 +9,5 @@
   <declare-styleable name="SearchToolbar">
     <attr name="hintText" format="string"/>
   </declare-styleable>
+
 </resources>

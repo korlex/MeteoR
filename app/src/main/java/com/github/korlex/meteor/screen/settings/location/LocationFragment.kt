@@ -2,15 +2,11 @@ package com.github.korlex.meteor.screen.settings.location
 
 
 import android.content.Context
-import android.graphics.PorterDuff
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import android.widget.Toast
-import androidx.core.content.ContextCompat
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.korlex.meteor.BaseFragment
 import com.github.korlex.meteor.MainActivity
@@ -22,13 +18,13 @@ import com.github.korlex.meteor.screen.settings.location.model.LocItem
 import dagger.android.support.AndroidSupportInjection
 import io.reactivex.rxkotlin.addTo
 import kotlinx.android.synthetic.main.fragment_location.btnApply
-import kotlinx.android.synthetic.main.fragment_location.layoutMessage
+import kotlinx.android.synthetic.main.fragment_location.layoutMsg
 import kotlinx.android.synthetic.main.fragment_location.layoutPlaceholder
 import kotlinx.android.synthetic.main.fragment_location.pbLoading
 import kotlinx.android.synthetic.main.fragment_location.rvLocations
 import kotlinx.android.synthetic.main.fragment_location.searchToolbar
-import kotlinx.android.synthetic.main.layout_message.btnMsgReload
-import kotlinx.android.synthetic.main.layout_message.tvMsgTitle
+import kotlinx.android.synthetic.main.layout_msg.btnMsgReload
+import kotlinx.android.synthetic.main.layout_msg.tvMsgText
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -55,7 +51,6 @@ class LocationFragment : BaseFragment(), LocationView {
     super.onViewCreated(view, savedInstanceState)
     setUpToolbar()
     setUpList()
-    setUpProgress()
     setUpMessage()
     btnApply.setOnClickListener { onLocationApplied() }
   }
@@ -63,14 +58,14 @@ class LocationFragment : BaseFragment(), LocationView {
   override fun showLocations(locItems: List<LocItem>) {
     locAdapter.locItems = locItems
     pbLoading.fadeOut()
-    layoutMessage.fadeOut()
+    layoutMsg.fadeOut()
     layoutPlaceholder.fadeOut()
     rvLocations.fadeIn()
     btnApply.fadeIn()
   }
 
   override fun showProgress() {
-    layoutMessage.fadeOut()
+    layoutMsg.fadeOut()
     layoutPlaceholder.fadeOut()
     rvLocations.fadeOut()
     btnApply.fadeOut()
@@ -78,28 +73,30 @@ class LocationFragment : BaseFragment(), LocationView {
   }
 
   override fun showEmpty() {
-    tvMsgTitle.text = getString(R.string.locations_empty)
+    tvMsgText.text = getString(R.string.locations_empty)
+    btnMsgReload.visibility = View.GONE
     pbLoading.fadeOut()
     rvLocations.fadeOut()
     btnApply.fadeOut()
     layoutPlaceholder.fadeOut()
-    layoutMessage.fadeIn()
+    layoutMsg.fadeIn()
   }
 
   override fun showError() {
-    tvMsgTitle.text = getString(R.string.locations_error)
+    tvMsgText.text = getString(R.string.locations_error)
+    btnMsgReload.visibility = View.VISIBLE
     pbLoading.fadeOut()
     rvLocations.fadeOut()
     btnApply.fadeOut()
     layoutPlaceholder.fadeOut()
-    layoutMessage.fadeIn()
+    layoutMsg.fadeIn()
   }
 
   private fun showPlaceHolder() {
     pbLoading.fadeOut()
     rvLocations.fadeOut()
     btnApply.fadeOut()
-    layoutMessage.fadeOut()
+    layoutMsg.fadeOut()
     layoutPlaceholder.fadeIn()
   }
 
@@ -111,21 +108,14 @@ class LocationFragment : BaseFragment(), LocationView {
     searchToolbar
         .observeSearchField()
         .subscribe(this::checkQuery, Timber::e)
-        .addTo(disposables)
+        .addTo(disposablesStorage1)
   }
 
   private fun setUpList() {
     with(rvLocations) {
       layoutManager = LinearLayoutManager(fetchActivity())
       adapter = locAdapter
-      addItemDecoration(DividerItemDecoration(fetchActivity(), LinearLayout.VERTICAL))
     }
-  }
-
-  private fun setUpProgress() {
-    pbLoading.indeterminateDrawable.setColorFilter(
-        ContextCompat.getColor(fetchActivity(), R.color.colorPrimaryDark),
-        PorterDuff.Mode.SRC_IN)
   }
 
   private fun setUpMessage() {
@@ -139,10 +129,7 @@ class LocationFragment : BaseFragment(), LocationView {
   private fun onLocationApplied() {
     with(locAdapter.selectedItem) {
       if(this != null) {
-        val loc = getString(R.string.loc_title, city, country)
-        val lat = latitude.toString()
-        val lon = longitude.toString()
-        locPresenter.saveLocation(loc, lat, lon)
+        locPresenter.saveLocation(placeId, placeName)
         proceedNext()
       } else {
         showToast()

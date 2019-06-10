@@ -1,14 +1,29 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
 
   <!-- Base application theme. -->
   <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
     <!-- Customize your theme here. -->
+    <item name="android:windowBackground">@color/white_FFFFFF</item>
+    <item name="android:progressBarStyle">@style/Widget.AppCompat.ProgressBar.Default</item>
+  </style>
+
+  <style name="AppTheme.OceanBlue">
     <item name="colorPrimary">@color/colorPrimary</item>
     <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
     <item name="colorAccent">@color/colorAccent</item>
-    <item name="android:windowBackground">@color/white_FFFFFF</item>
   </style>
 
+  <style name="AppTheme.ForestGreen">
+    <item name="colorPrimary">@color/forestGreenColorPrimary</item>
+    <item name="colorPrimaryDark">@color/forestGreenColorPrimaryDark</item>
+    <item name="colorAccent">@color/forestGreenColorAccent</item>
+  </style>
+
+  <style name="AppTheme.SunsetRed">
+    <item name="colorPrimary">@color/sunsetRedColorPrimary</item>
+    <item name="colorPrimaryDark">@color/sunsetRedColorPrimaryDark</item>
+    <item name="colorAccent">@color/sunsetRedColorAccent</item>
+  </style>
 
   <style name="AppTheme.BrandedLaunch">
     <item name="android:windowTranslucentStatus">true</item>
@@ -22,4 +37,9 @@
     <item name="android:paddingLeft">16dp</item>
     <item name="android:paddingRight">16dp</item>
   </style>
+
+  <style name="Widget.AppCompat.ProgressBar.Default" parent="Widget.AppCompat.ProgressBar">
+    <item name="colorAccent">?attr/colorPrimaryDark</item>
+  </style>
+  
 </resources>

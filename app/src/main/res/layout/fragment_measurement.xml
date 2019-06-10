@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white_EEEEEE"
+    tools:context=".screen.settings.measurement.MeasurementFragment">
+
+  <com.github.korlex.meteor.view.Toolbar
+      android:id="@+id/toolbar"
+      android:layout_width="match_parent"
+      android:layout_height="56dp"
+      app:titleText="@string/measurement_units"
+      app:navBtn="@drawable/ic_back"/>
+
+  <TextView
+      android:layout_width="match_parent"
+      android:layout_height="48dp"
+      android:paddingStart="16dp"
+      android:paddingEnd="16dp"
+      android:layout_marginTop="8dp"
+      android:gravity="center_vertical"
+      android:text="@string/temperature_units"
+      android:textSize="16sp"
+      android:textColor="@color/gray_4d4d4d"
+      />
+  
+  <FrameLayout
+      android:id="@+id/tempWrapper"
+      android:layout_width="match_parent"
+      android:layout_height="144dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:gravity="center_vertical"
+        android:background="?selectableItemBackground"
+        android:text="@string/kelvin"
+        android:textSize="16sp"
+        android:textColor="@color/selectable_txt2"
+        android:tag="kelvin"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:layout_marginTop="48dp"
+        android:gravity="center_vertical"
+        android:background="?selectableItemBackground"
+        android:text="@string/celsius"
+        android:textSize="16sp"
+        android:textColor="@color/selectable_txt2"
+        android:tag="celsius"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:layout_marginTop="96dp"
+        android:gravity="center_vertical"
+        android:background="?selectableItemBackground"
+        android:text="@string/fahrenheit"
+        android:textSize="16sp"
+        android:textColor="@color/selectable_txt2"
+        android:tag="fahrenheit"
+        />
+
+  </FrameLayout>
+
+  <View
+      android:layout_width="match_parent"
+      android:layout_height="0.5dp"
+      android:layout_marginEnd="8dp"
+      android:layout_marginStart="8dp"
+      android:layout_marginTop="8dp"
+      android:background="@color/gray_8c8c8c"/>
+
+  <TextView
+      android:layout_width="match_parent"
+      android:layout_height="48dp"
+      android:paddingStart="16dp"
+      android:paddingEnd="16dp"
+      android:layout_marginTop="8dp"
+      android:gravity="center_vertical"
+      android:text="@string/pressure_units"
+      android:textSize="16sp"
+      android:textColor="@color/gray_4d4d4d"
+      />
+
+  <FrameLayout
+      android:id="@+id/pressureWrapper"
+      android:layout_width="match_parent"
+      android:layout_height="96dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:gravity="center_vertical"
+        android:background="?selectableItemBackground"
+        android:text="@string/pascal"
+        android:textSize="16sp"
+        android:textColor="@color/selectable_txt2"
+        android:tag="hpa"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:layout_marginTop="48dp"
+        android:gravity="center_vertical"
+        android:background="?selectableItemBackground"
+        android:text="@string/millimetre_of_mercury"
+        android:textSize="16sp"
+        android:textColor="@color/selectable_txt2"
+        android:tag="mmhg"
+        />
+
+  </FrameLayout>
+
+  <View
+      android:layout_width="match_parent"
+      android:layout_height="0.5dp"
+      android:layout_marginEnd="8dp"
+      android:layout_marginStart="8dp"
+      android:layout_marginTop="8dp"
+      android:background="@color/gray_8c8c8c"/>
+
+  <TextView
+      android:layout_width="match_parent"
+      android:layout_height="48dp"
+      android:paddingStart="16dp"
+      android:paddingEnd="16dp"
+      android:layout_marginTop="8dp"
+      android:gravity="center_vertical"
+      android:text="@string/wind_speed_units"
+      android:textSize="16sp"
+      android:textColor="@color/gray_4d4d4d"
+      />
+
+  <FrameLayout
+      android:id="@+id/speedWrapper"
+      android:layout_width="match_parent"
+      android:layout_height="96dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:gravity="center_vertical"
+        android:background="?selectableItemBackground"
+        android:text="@string/meters_per_second"
+        android:textSize="16sp"
+        android:textColor="@color/selectable_txt2"
+        android:tag="ms"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:layout_marginTop="48dp"
+        android:gravity="center_vertical"
+        android:background="?selectableItemBackground"
+        android:text="@string/miles_per_hour"
+        android:textSize="16sp"
+        android:textColor="@color/selectable_txt2"
+        android:tag="mh"
+        />
+
+  </FrameLayout>
+
+</LinearLayout>

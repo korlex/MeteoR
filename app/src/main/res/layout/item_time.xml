@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="88dp"
+    android:layout_height="168dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+  <TextView
+      android:id="@+id/tvTime"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:textSize="16sp"
+      android:textColor="@color/selectable_txt"
+      android:textAlignment="center"
+      tools:text="21:00"/>
+
+  <ImageView
+      android:id="@+id/ivTimeIcon"
+      android:layout_width="56dp"
+      android:layout_height="56dp"
+      android:layout_marginTop="16dp"
+      android:layout_marginBottom="16dp"
+      app:tint="@color/selectable_img"
+      tools:srcCompat="@drawable/ic_few_clouds"/>
+
+  <TextView
+      android:id="@+id/tvTimeTemp"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:textSize="16sp"
+      android:textColor="@color/selectable_img"
+      android:textAlignment="center"
+      tools:text="21 \u2103"/>
+
+</LinearLayout>

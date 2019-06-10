@@ -1,18 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="72dp"
+    android:layout_height="76dp"
     android:padding="16dp"
     android:background="?selectableItemBackground">
+
+  <ImageView
+      android:id="@+id/ivIcon"
+      android:layout_width="24dp"
+      android:layout_height="match_parent"
+      app:srcCompat="@drawable/ic_loc"
+      app:tint="@color/selectable_img"/>
 
   <TextView
       android:id="@+id/tvTitle"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_gravity="top"
-      android:textColor="@color/gray_4d4d4d"
+      android:layout_marginStart="40dp"
+      android:textColor="@color/selectable_txt2"
+      android:textSize="16sp"
+      android:visibility="visible"
       tools:text="London, UK"/>
 
   <TextView
@@ -20,7 +31,10 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_gravity="bottom"
-      android:textColor="@color/gray_4d4d4d"
+      android:layout_marginStart="40dp"
+      android:textColor="@color/selectable_txt2"
+      android:textSize="16sp"
+      android:visibility="visible"
       tools:text="[125,45, - 568.32]"/>
 
 </FrameLayout>

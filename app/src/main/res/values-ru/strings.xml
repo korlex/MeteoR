@@ -1,0 +1,71 @@
+<resources>
+  <string name="app_name">MeteoR</string>
+  <string name="locale">ru</string>
+
+  <string name="welcome_hint">Похоже, что это ваш первый запуск приложения. Для правильной работы необходима первоначальная настройка.</string>
+  <string name="proceed_to_settings">Перейти к настройкам</string>
+
+  <string name="search_hint">искать места&#8230;</string>
+  <string name="search_placeholder">Напишите название города (напр. Париж)\nчтобы определить погоду\nдля конкретного местоположения</string>
+  <string name="apply">Применить</string>
+  <string name="reload">Перезагрузить</string>
+
+  <string name="loc_title">%1$s, %2$s</string>
+  <string name="loc_coords">[%1$f, %2$f]</string>
+  <string name="loc_coords_query">lat=%1$f&amp;lon=%2$f</string>
+  <string name="locations_empty">Места не найдены</string>
+  <string name="locations_error">При загрузке мест произошла ошибка</string>
+  <string name="locations_toast">Место не выбрано</string>
+
+  <string name="day_month">%1$d %2$s</string>
+  <string name="hours_minutes">%1$02d : %2$02d</string>
+
+  <string name="condition">состояние : %1$s</string>
+  <string name="max_temp">Макс. температура : %1$.1f \u2103</string>
+  <string name="min_temp">Мин. температура : %1$.1f \u2103</string>
+
+  <string name="settings">Настройки</string>
+  <string name="location">Местоположение</string>
+  <string name="about">О приложении</string>
+  <string name="language">Язык</string>
+  <string name="color_scheme">Цветовая схема</string>
+
+  <string name="about_desc">MeteoR (Meteo Request) is the weather application made for demonstration purpose.\n\nApi:
+        https://openweathermap.org\nIcons: https://www.flaticon.com
+  </string>
+
+  <string name="forecasts_empty">Погода не найдена</string>
+  <string name="forecasts_error">При загрузке погоды произошла ошибка</string>
+  <string name="error_weather">При загрузке данных о погоде произошла ошибка</string>
+
+  <string name="time_period">(%1$d:%2$d - %3$d:%4$d)</string>
+  <string name="date_time">%1$s (%2$s - %3$s)</string>
+  <string name="temp_state">%1$d \u2103, %2$s</string>
+  <string name="temp">%1$d \u2103</string>
+  <string name="humidity_template">Влажность : %1$d %%</string>
+
+
+  <string name="measurement_units">Единицы измерения</string>
+  <string name="temperature_units">Температура :</string>
+  <string name="kelvin">Кельвины</string>
+  <string name="celsius">Градусы</string>
+  <string name="fahrenheit">Фаренгейты</string>
+
+  <string name="pressure_units">Давление :</string>
+  <string name="pressure_template">Давление : %1$d %2$s</string>
+  <string name="pascal">Паскали</string>
+  <string name="hpa">Па</string>
+  <string name="millimetre_of_mercury">Миллиметры ртутного столба</string>
+  <string name="mm_hg">мм рт. ст.</string>
+
+  <string name="wind_speed_units">Скорость ветра :</string>
+  <string name="wind_speed_template">Скорость ветра : %1$d %2$s</string>
+  <string name="meters_per_second">Метры в секунду</string>
+  <string name="meter_sec">м/c</string>
+  <string name="miles_per_hour">Мили в час</string>
+  <string name="miles_hour">м/ч</string>
+
+  <string name="red">Красный закат</string>
+  <string name="green">Зелёный лес</string>
+  <string name="blue">Синий океан</string>
+</resources>

@@ -1,8 +1,6 @@
 <resources>
   <string name="app_name">MeteoR</string>
-
-  <!-- TODO: Remove or change this placeholder text -->
-  <string name="hello_blank_fragment">Hello blank fragment</string>
+  <string name="locale">en</string>
 
   <string name="welcome_hint">Looks like this is your first app launch. Initial setup is required for it`is proper
         work.
@@ -10,12 +8,13 @@
   <string name="proceed_to_settings">Proceed to settings</string>
 
   <string name="search_hint">search places&#8230;</string>
-  <string name="search_placeholder"> Enter a city (e.g. Paris)\nTo determine the forecast\nfor a certain location</string>
+  <string name="search_placeholder">Enter a city (e.g. Paris)\nTo determine the forecast\nfor a certain location
+    </string>
   <string name="apply">Apply</string>
   <string name="reload">Reload</string>
 
   <string name="loc_title">%1$s, %2$s</string>
-  <string name="loc_coords">[%1$f, %2$f]</string>
+  <string name="loc_coords">(%1$f, %2$f)</string>
   <string name="loc_coords_query">lat=%1$f&amp;lon=%2$f</string>
   <string name="locations_empty">No locations found</string>
   <string name="locations_error">An error occurred while loading locations</string>
@@ -23,6 +22,7 @@
 
   <string name="day_month">%1$d %2$s</string>
   <string name="hours_minutes">%1$02d : %2$02d</string>
+  <string name="hour" translatable="false">%1$02d : 00</string>
 
   <string name="condition">Condition : %1$s</string>
   <string name="max_temp">Max. temperature : %1$.1f \u2103</string>
@@ -31,9 +31,49 @@
   <string name="settings">Settings</string>
   <string name="location">Location</string>
   <string name="about">About</string>
+  <string name="language">Language</string>
+  <string name="color_scheme">Color scheme</string>
 
-  <string name="about_desc">MeteoR (Meteo Request) is the weather application made for demonstration purpose.\n\nApi: https://openweathermap.org\nIcons: https://www.flaticon.com</string>
+  <string name="about_desc">MeteoR (Meteo Request) is the weather application made for demonstration purpose.\n\nApi:
+        https://openweathermap.org\nIcons: https://www.flaticon.com
+    </string>
 
   <string name="forecasts_empty">No forecasts found</string>
   <string name="forecasts_error">An error occurred while loading forecasts</string>
+  <string name="error_weather">An error occurred while loading weather data</string>
+
+  <string name="time_period">(%1$d:%2$d - %3$d:%4$d)</string>
+  <string name="date_time">%1$s (%2$s - %3$s)</string>
+  <string name="temp_state">%1$d \u2103, %2$s</string>
+  <string name="temp">%1$d \u2103</string>
+  <string name="humidity_template">Humidity : %1$d %%</string>
+
+
+  <string name="measurement_units">Measurement units</string>
+  <string name="temperature_units">Temperature units :</string>
+  <string name="kelvin">Kelvin</string>
+  <string name="celsius">Celsius</string>
+  <string name="fahrenheit">Fahrenheit</string>
+
+  <string name="pressure_units">Air pressure units :</string>
+  <string name="pressure_template">Air pressure : %1$d %2$s</string>
+  <string name="pascal">Pascal</string>
+  <string name="hpa">hPa</string>
+  <string name="millimetre_of_mercury">Millimetre of mercury</string>
+  <string name="mm_hg">mm Hg</string>
+
+  <string name="wind_speed_units">Wind speed units :</string>
+  <string name="wind_speed_template">Wind speed : %1$d %2$s</string>
+  <string name="meters_per_second">Meters per second</string>
+  <string name="meter_sec">m/s</string>
+  <string name="miles_per_hour">Miles per hour</string>
+  <string name="miles_hour">m/h</string>
+
+  <string name="english" translatable="false">English</string>
+  <string name="russian" translatable="false">Русский</string>
+
+  <string name="red">Sunset red</string>
+  <string name="green">Forest green</string>
+  <string name="blue">Ocean blue</string>
+
 </resources>

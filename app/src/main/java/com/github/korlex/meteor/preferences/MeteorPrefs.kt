@@ -11,15 +11,44 @@ class MeteorPrefs(context: Context) {
   private val preferences: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
   private val rxPreferences: RxSharedPreferences = RxSharedPreferences.create(preferences)
 
-  val location: Preference<String> = rxPreferences.getString(LOCATION)
-  val lat: Preference<String> = rxPreferences.getString(LAT)
-  val lon: Preference<String> = rxPreferences.getString(LON)
+  val locName: Preference<String> = rxPreferences.getString(LOCATION_NAME)
+  val locId: Preference<Int> = rxPreferences.getInteger(LOCATION_ID)
+//  val lat: Preference<String> = rxPreferences.getString(LAT)
+//  val lon: Preference<String> = rxPreferences.getString(LON)
 
-  fun isFilled(): Boolean = location.isSet && lat.isSet && lon.isSet
+  val pressureUnit: Preference<String> = rxPreferences.getString(PRESSURE_UNIT, HPA)
+  val speedUnit: Preference<String> = rxPreferences.getString(SPEED_UNIT, MS)
+  val tempUnit: Preference<String> = rxPreferences.getString(TEMP_UNIT, KELVIN)
+
+  val colorScheme: Preference<String> = rxPreferences.getString(COLOR_SCHEME, OCEAN_BLUE)
+
+
+//  fun isFilled(): Boolean = locName.isSet && lat.isSet && lon.isSet
 
   companion object {
-    const val LOCATION = "location"
+    const val LOCATION_NAME = "location_name"
+    const val LOCATION_ID = "location_id"
+
+    const val LOCATION = "locName"
     const val LAT = "lat"
     const val LON = "lon"
+
+    const val PRESSURE_UNIT = "pressure_unit"
+    const val MMHG = "mmhg"
+    const val HPA = "hpa"
+
+    const val SPEED_UNIT = "speed_unit"
+    const val MS = "ms"
+    const val MH = "mh"
+
+    const val TEMP_UNIT = "temp_unit"
+    const val FAHRENHEIT = "fahrenheit"
+    const val CELSIUS = "celsius"
+    const val KELVIN = "kelvin"
+
+    const val COLOR_SCHEME = "color_scheme"
+    const val OCEAN_BLUE = "ocean_blue"
+    const val FOREST_GREEN = "forest_green"
+    const val SUNSET_RED = "sunset_red"
   }
 }

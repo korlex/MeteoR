@@ -7,5 +7,6 @@ data class Forecast(
     val dtTxt: String,
     val dt: Long,
     val main: Main,
-    val weather: List<Weather>
+    val weather: List<Weather>,
+    val wind: Wind
 )

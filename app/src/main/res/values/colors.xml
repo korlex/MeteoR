@@ -1,11 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#03A9F4</color>
-    <color name="colorPrimaryDark">#0288D1</color>
-    <color name="colorAccent">#448AFF</color>
+  <color name="colorPrimary">#03A9F4</color>
+  <color name="colorPrimaryDark">#0288D1</color>
+  <color name="colorAccent">#448AFF</color>
 
-    <color name="blue_b3cfff">#b3cfff</color>
-    <color name="white_FFFFFF">#ffffff</color>
-    <color name="gray_8c8c8c">#8c8c8c</color>
-    <color name="gray_4d4d4d">#4d4d4d</color>
+  <color name="forestGreenColorPrimary">#8bc34a</color>
+  <color name="forestGreenColorPrimaryDark">#5a9216</color>
+  <color name="forestGreenColorAccent">#4CAF50</color>
+
+  <color name="sunsetRedColorPrimary">#f44336</color>
+  <color name="sunsetRedColorPrimaryDark">#ba000d</color>
+  <color name="sunsetRedColorAccent">#FF5252</color>
+
+  <color name="blue_b3cfff">#b3cfff</color>
+  <color name="white_FFFFFF">#ffffff</color>
+  <color name="white_EEEEEE">#EEEEEE</color>
+
+  <color name="gray_b3b3b3">#b3b3b3</color>
+  <color name="gray_8c8c8c">#8c8c8c</color>
+  <color name="gray_4d4d4d">#4d4d4d</color>
+
+  <color name="red_f44336">#f44336</color>
+  <color name="green_8bc34a">#8bc34a</color>
 </resources>

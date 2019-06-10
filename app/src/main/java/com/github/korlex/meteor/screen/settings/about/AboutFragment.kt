@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import com.github.korlex.meteor.BaseFragment
 
 import com.github.korlex.meteor.R
-import kotlinx.android.synthetic.main.fragment_weather.toolbar
+import kotlinx.android.synthetic.main.fragment_about.toolbar
 
 class AboutFragment : BaseFragment() {
 

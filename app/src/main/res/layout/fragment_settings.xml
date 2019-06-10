@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/white_FFFFFF"
     tools:context=".screen.settings.SettingsFragment">
 
   <com.github.korlex.meteor.view.Toolbar
@@ -28,8 +29,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:tint="@color/colorPrimaryDark"
-        app:srcCompat="@drawable/ic_city"/>
+        android:tint="?attr/colorPrimaryDark"
+        app:srcCompat="@drawable/ic_loc"/>
 
     <TextView
         android:layout_width="match_parent"
@@ -43,10 +44,9 @@
   </FrameLayout>
 
   <FrameLayout
-      android:id="@+id/btnAbout"
+      android:id="@+id/btnMeasurement"
       android:layout_width="match_parent"
       android:layout_height="48dp"
-      android:layout_marginTop="8dp"
       android:background="?selectableItemBackground"
       android:paddingLeft="16dp"
       android:paddingRight="16dp">
@@ -55,7 +55,60 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:tint="@color/colorPrimaryDark"
+        android:tint="?attr/colorPrimaryDark"
+        app:srcCompat="@drawable/ic_ruler"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="40dp"
+        android:text="@string/measurement_units"
+        android:textColor="@color/gray_4d4d4d"
+        android:textSize="16sp"/>
+
+  </FrameLayout>
+
+  <FrameLayout
+      android:id="@+id/btnColor"
+      android:layout_width="match_parent"
+      android:layout_height="48dp"
+      android:background="?selectableItemBackground"
+      android:paddingLeft="16dp"
+      android:paddingRight="16dp">
+
+    <ImageView
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_gravity="center_vertical"
+        android:padding="2dp"
+        android:tint="?attr/colorPrimaryDark"
+        app:srcCompat="@drawable/shape_circle"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="40dp"
+        android:text="@string/color_scheme"
+        android:textColor="@color/gray_4d4d4d"
+        android:textSize="16sp"/>
+
+  </FrameLayout>
+
+  <FrameLayout
+      android:id="@+id/btnAbout"
+      android:layout_width="match_parent"
+      android:layout_height="48dp"
+      android:background="?selectableItemBackground"
+      android:paddingLeft="16dp"
+      android:paddingRight="16dp">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:tint="?attr/colorPrimaryDark"
         app:srcCompat="@drawable/ic_info"/>
 
     <TextView

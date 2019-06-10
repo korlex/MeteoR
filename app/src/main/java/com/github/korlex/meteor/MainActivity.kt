@@ -5,9 +5,10 @@ import android.os.Bundle
 import android.os.Handler
 import android.view.View
 import androidx.fragment.app.Fragment
-import com.github.korlex.meteor.extensions.fadeOut
 import com.github.korlex.meteor.preferences.MeteorPrefs
-import com.github.korlex.meteor.screen.settings.location.LocationFragment
+import com.github.korlex.meteor.preferences.MeteorPrefs.Companion.FOREST_GREEN
+import com.github.korlex.meteor.preferences.MeteorPrefs.Companion.OCEAN_BLUE
+import com.github.korlex.meteor.preferences.MeteorPrefs.Companion.SUNSET_RED
 import com.github.korlex.meteor.screen.weather.WeatherFragment
 import com.github.korlex.meteor.screen.welcome.WelcomeFragment
 import dagger.android.AndroidInjection
@@ -25,20 +26,33 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
   @Inject
   lateinit var meteorPrefs: MeteorPrefs
 
-
   override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
-    setContentView(R.layout.activity_main)
     AndroidInjection.inject(this)
-    manageStartLaunch()
+    super.onCreate(savedInstanceState)
+    initColorScheme()
+    setContentView(R.layout.activity_main)
+    manageStartLaunch(savedInstanceState)
   }
 
   override fun supportFragmentInjector(): AndroidInjector<Fragment> = dispatchingAndroidInjector
 
-  private fun manageStartLaunch() {
-    Handler().postDelayed(
-        { if(meteorPrefs.isFilled()) showWeather() else replaceFragment(WelcomeFragment()) }, 1000
-    )
+  private fun initColorScheme() {
+    when(meteorPrefs.colorScheme.get()) {
+      OCEAN_BLUE   -> setTheme(R.style.AppTheme_OceanBlue)
+      FOREST_GREEN -> setTheme(R.style.AppTheme_ForestGreen)
+      SUNSET_RED   -> setTheme(R.style.AppTheme_SunsetRed)
+    }
+  }
+
+  private fun manageStartLaunch(savedInstanceState: Bundle?) {
+    if(savedInstanceState == null) {
+      Handler().postDelayed(
+          { if(meteorPrefs.locId.isSet) showWeather() else replaceFragment(WelcomeFragment()) }, 1000
+      )
+    } else {
+      layoutBrandLaunch.visibility = View.GONE
+
+    }
   }
 
   fun showWeather() {
@@ -59,4 +73,5 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
     if (addToBackStack) { transaction.addToBackStack(tag) }
     transaction.commitAllowingStateLoss()
   }
+
 }

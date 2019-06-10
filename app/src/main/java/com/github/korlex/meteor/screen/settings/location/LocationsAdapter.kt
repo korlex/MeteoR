@@ -3,10 +3,10 @@ package com.github.korlex.meteor.screen.settings.location
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.github.korlex.meteor.R
 import com.github.korlex.meteor.screen.settings.location.model.LocItem
+import kotlinx.android.synthetic.main.item_location.view.ivIcon
 import kotlinx.android.synthetic.main.item_location.view.tvCoords
 import kotlinx.android.synthetic.main.item_location.view.tvTitle
 
@@ -40,15 +40,17 @@ class LocationsAdapter : RecyclerView.Adapter<LocationsAdapter.LocationViewHolde
   inner class LocationViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
     fun bind(locItem: LocItem) = with(itemView) {
       with(locItem) {
-        tvTitle.text = resources.getString(R.string.loc_title, city, country)
+        tvTitle.text = resources.getString(R.string.loc_title, placeName, country)
         tvCoords.text = resources.getString(R.string.loc_coords, latitude, longitude)
 
         if(selectedItem == locItem) {
-          tvTitle.setTextColor(ContextCompat.getColor(context, R.color.colorPrimaryDark))
-          tvCoords.setTextColor(ContextCompat.getColor(context, R.color.colorPrimaryDark))
+          ivIcon.isSelected = true
+          tvTitle.isSelected = true
+          tvCoords.isSelected = true
         } else {
-          tvTitle.setTextColor(ContextCompat.getColor(context, R.color.gray_4d4d4d))
-          tvCoords.setTextColor(ContextCompat.getColor(context, R.color.gray_4d4d4d))
+          ivIcon.isSelected = false
+          tvTitle.isSelected = false
+          tvCoords.isSelected = false
         }
       }
     }

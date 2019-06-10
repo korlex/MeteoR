@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="442dp">
+
+  <LinearLayout
+      android:id="@+id/datesWrapper"
+      android:layout_width="match_parent"
+      android:layout_height="442dp"
+      android:orientation="vertical">
+
+    <include layout="@layout/item_date"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/gray_8c8c8c"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"/>
+
+    <include layout="@layout/item_date"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/gray_8c8c8c"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"/>
+
+    <include layout="@layout/item_date"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/gray_8c8c8c"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"/>
+
+    <include layout="@layout/item_date"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/gray_8c8c8c"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"/>
+
+    <include layout="@layout/item_date"/>
+
+  </LinearLayout>
+
+</androidx.cardview.widget.CardView>

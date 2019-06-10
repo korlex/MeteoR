@@ -5,5 +5,5 @@ import io.reactivex.Single
 
 interface LocationDataSource {
   fun getLocations(q: String?): Single<List<LocItem>>
-  fun saveLocation(loc: String, lat: String, lon: String)
+  fun saveLocation(placeId: Int, placeName: String)
 }

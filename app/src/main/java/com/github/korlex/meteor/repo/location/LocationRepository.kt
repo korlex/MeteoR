@@ -14,12 +14,11 @@ class LocationRepository @Inject constructor (
   override fun getLocations(q: String?): Single<List<LocItem>> =
       meteorService.getLocations(q).map { locResponseToLocItems(it) }
 
-  override fun saveLocation(loc: String, lat: String, lon: String) {
-    meteoPrefs.location.set(loc)
-    meteoPrefs.lat.set(lat)
-    meteoPrefs.lon.set(lon)
+  override fun saveLocation(placeId: Int, placeName: String) {
+    meteoPrefs.locId.set(placeId)
+    meteoPrefs.locName.set(placeName)
   }
 
   private fun locResponseToLocItems(locationResponse: LocationResponse): List<LocItem> =
-      locationResponse.list.map { LocItem(it.name, it.sys.country, it.coord.lat, it.coord.lon) }
+      locationResponse.list.map { LocItem(it.id, it.name, it.sys.country, it.coord.lat, it.coord.lon) }
 }

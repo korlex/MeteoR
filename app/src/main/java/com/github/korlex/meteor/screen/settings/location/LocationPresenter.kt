@@ -21,8 +21,8 @@ class LocationPresenter(
         .addTo(disposables)
   }
 
-  fun saveLocation(loc: String, lat: String, lon: String) {
-    dataSource.saveLocation(loc, lat, lon)
+  fun saveLocation(placeId: Int, placeName: String) {
+    dataSource.saveLocation(placeId, placeName)
   }
 
   private fun onSuccess(locItems: List<LocItem>) {

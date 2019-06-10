@@ -5,9 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/white_FFFFFF"
-    tools:context=".screen.weather.WeatherFragment">
+    android:background="@color/white_EEEEEE">
 
   <com.github.korlex.meteor.view.Toolbar
       android:id="@+id/toolbar"
@@ -18,23 +16,53 @@
       app:cardElevation="4dp"
       tools:titleText="Saint Petersburg, Ru"/>
 
-  <androidx.recyclerview.widget.RecyclerView
-      android:id="@+id/rvForecasts"
+  <androidx.core.widget.NestedScrollView
+      android:id="@+id/content"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
-      android:layout_marginTop="56dp"/>
+      android:layout_marginTop="56dp"
+      android:visibility="gone">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+      <include
+          layout="@layout/layout_w_top"
+          android:layout_width="match_parent"
+          android:layout_height="320dp"
+          android:layout_marginTop="16dp"/>
+
+      <include
+          layout="@layout/layout_w_mid"
+          android:layout_width="match_parent"
+          android:layout_height="168dp"
+          android:layout_marginBottom="16dp"
+          android:layout_marginTop="16dp"/>
+
+
+      <include
+          layout="@layout/layout_w_bottom2"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginBottom="16dp"
+          android:minHeight="442dp"/>
+
+    </LinearLayout>
+
+  </androidx.core.widget.NestedScrollView>
+
+  <include
+      layout="@layout/layout_msg"
+      android:id="@+id/layoutMsg"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:visibility="gone"/>
 
   <ProgressBar
       android:id="@+id/pbLoading"
       android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_gravity="center"
-      android:visibility="gone"/>
-
-  <include
-      layout="@layout/layout_message"
-      android:id="@+id/layoutMessage"
-      android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_gravity="center"
       android:visibility="gone"/>
