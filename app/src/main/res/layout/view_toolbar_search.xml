@@ -12,7 +12,7 @@
       android:background="?attr/colorPrimary">
 
     <ImageView
-        android:id="@+id/btnSearch"
+        android:id="@+id/btnNav"
         android:layout_width="56dp"
         android:layout_height="0dp"
         android:background="?selectableItemBackgroundBorderless"
@@ -24,17 +24,38 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_search"/>
 
-    <ImageView
-        android:id="@+id/btnClear"
-        android:layout_width="56dp"
-        android:layout_height="0dp"
-        android:background="?selectableItemBackgroundBorderless"
-        android:scaleType="center"
-        android:visibility="gone"
+    <LinearLayout
+        android:id="@+id/btnWrapper"
+        android:layout_width="0dp"
+        android:layout_height="56dp"
+        android:minWidth="16dp"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_clear"/>
+        app:layout_constraintTop_toTopOf="parent">
+
+      <ImageView
+          android:id="@+id/btnClear"
+          android:layout_width="56dp"
+          android:layout_height="56dp"
+          android:background="?selectableItemBackgroundBorderless"
+          android:scaleType="center"
+          app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintTop_toTopOf="parent"
+          app:srcCompat="@drawable/ic_clear"
+          tools:visibility="gone"/>
+
+      <ImageView
+          android:id="@+id/btnOptional"
+          android:layout_width="56dp"
+          android:layout_height="56dp"
+          android:background="?selectableItemBackgroundBorderless"
+          android:scaleType="center"
+          app:srcCompat="@drawable/ic_my_loc"
+          tools:visibility="gone"/>
+
+    </LinearLayout>
 
     <EditText
         android:id="@+id/etSearchField"
@@ -52,8 +73,8 @@
         android:visibility="visible"
         android:textCursorDrawable="@drawable/et_cursor"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btnClear"
-        app:layout_constraintStart_toEndOf="@+id/btnSearch"
+        app:layout_constraintEnd_toStartOf="@+id/btnWrapper"
+        app:layout_constraintStart_toEndOf="@+id/btnNav"
         app:layout_constraintTop_toTopOf="parent"
         tools:hint="@string/search_hint"/>
 

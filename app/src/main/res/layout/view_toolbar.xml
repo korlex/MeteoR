@@ -4,7 +4,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="56dp">
+    android:layout_height="56dp"
+    app:cardCornerRadius="0dp">
 
   <androidx.constraintlayout.widget.ConstraintLayout
       android:layout_width="match_parent"
@@ -12,7 +13,7 @@
       android:background="?attr/colorPrimary">
 
     <FrameLayout
-        android:id="@+id/btnNavWrapper"
+        android:id="@+id/navBtnWrapper"
         android:layout_width="wrap_content"
         android:layout_height="56dp"
         android:minWidth="16dp"
@@ -30,24 +31,33 @@
 
     </FrameLayout>
 
-    <FrameLayout
-        android:id="@+id/btnOptionalWrapper"
+    <LinearLayout
+        android:id="@+id/optionalBtnsWrapper"
         android:layout_width="wrap_content"
         android:layout_height="56dp"
         android:minWidth="16dp"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
       <ImageView
-          android:id="@+id/btnOptional"
+          android:id="@+id/btnOptional1"
           android:layout_width="56dp"
           android:layout_height="56dp"
           android:background="?selectableItemBackgroundBorderless"
           android:scaleType="center"
           android:visibility="gone"/>
 
-    </FrameLayout>
+      <ImageView
+          android:id="@+id/btnOptional2"
+          android:layout_width="56dp"
+          android:layout_height="56dp"
+          android:background="?selectableItemBackgroundBorderless"
+          android:scaleType="center"
+          android:visibility="gone"/>
+
+    </LinearLayout>
 
     <TextView
         android:id="@+id/tvTitle"
@@ -60,8 +70,8 @@
         android:maxLines="1"
         android:ellipsize="end"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btnOptionalWrapper"
-        app:layout_constraintStart_toEndOf="@+id/btnNavWrapper"
+        app:layout_constraintEnd_toStartOf="@+id/optionalBtnsWrapper"
+        app:layout_constraintStart_toEndOf="@+id/navBtnWrapper"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Title"/>
 

@@ -68,4 +68,13 @@
   <string name="red">Красный закат</string>
   <string name="green">Зелёный лес</string>
   <string name="blue">Синий океан</string>
+
+  <string name="warn_time_force_load">Данные о погоде обновляются не так часто. Перезагрузка будет доступна через %1$d минут.</string>
+  <string name="warn_net_force_load">При загрузке данных о погоде произошла ошибка. Проверьте ваше подключение к сети.</string>
+
+  <string name="return_back">Вернуться назад</string>
+
+  <string name="permission_error">Требуется разрешение на доступ к местоположению</string>
+  <string name="network_error">Отсутствует подключение к интернету</string>
+
 </resources>

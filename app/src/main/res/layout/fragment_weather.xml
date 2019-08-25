@@ -12,53 +12,70 @@
       android:layout_width="match_parent"
       android:layout_height="56dp"
       app:navBtn="@drawable/ic_meteor"
-      app:optionalBtn="@drawable/ic_settings"
+      app:optionalBtn2="@drawable/ic_settings"
       app:cardElevation="4dp"
       tools:titleText="Saint Petersburg, Ru"/>
 
-  <androidx.core.widget.NestedScrollView
-      android:id="@+id/content"
+  <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+      android:id="@+id/contentWrapper"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       android:layout_marginTop="56dp"
       android:visibility="gone">
 
-    <LinearLayout
-        android:orientation="vertical"
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/content"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:overScrollMode="never"
+        android:visibility="visible">
 
-      <include
-          layout="@layout/layout_w_top"
+      <LinearLayout
+          android:orientation="vertical"
           android:layout_width="match_parent"
-          android:layout_height="320dp"
-          android:layout_marginTop="16dp"/>
+          android:layout_height="match_parent">
 
-      <include
-          layout="@layout/layout_w_mid"
-          android:layout_width="match_parent"
-          android:layout_height="168dp"
-          android:layout_marginBottom="16dp"
-          android:layout_marginTop="16dp"/>
+        <include
+            layout="@layout/layout_w_top"
+            android:layout_width="match_parent"
+            android:layout_height="320dp"
+            android:layout_marginTop="16dp"/>
+
+        <include
+            layout="@layout/layout_w_mid"
+            android:layout_width="match_parent"
+            android:layout_height="168dp"
+            android:layout_marginBottom="16dp"
+            android:layout_marginTop="16dp"/>
 
 
-      <include
-          layout="@layout/layout_w_bottom2"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:layout_marginBottom="16dp"
-          android:minHeight="442dp"/>
+        <include
+            layout="@layout/layout_w_bottom2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:minHeight="442dp"/>
 
-    </LinearLayout>
+      </LinearLayout>
 
-  </androidx.core.widget.NestedScrollView>
+    </androidx.core.widget.NestedScrollView>
+
+  </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
 
   <include
-      layout="@layout/layout_msg"
-      android:id="@+id/layoutMsg"
+      layout="@layout/layout_warn"
+      android:id="@+id/layoutWarn"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       android:visibility="gone"/>
+
+    <include
+            layout="@layout/layout_warn_forceload"
+            android:id="@+id/layoutWarnForceLoad"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"/>
 
   <ProgressBar
       android:id="@+id/pbLoading"

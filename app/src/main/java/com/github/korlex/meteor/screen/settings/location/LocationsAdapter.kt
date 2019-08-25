@@ -12,20 +12,14 @@ import kotlinx.android.synthetic.main.item_location.view.tvTitle
 
 class LocationsAdapter : RecyclerView.Adapter<LocationsAdapter.LocationViewHolder>() {
 
-  var locItems: List<LocItem> = ArrayList()
-    set(value) {
-      field = value
-      notifyDataSetChanged()
-    }
-
-  var selectedItem: LocItem? = null
-
+  private var locItems: List<LocItem> = ArrayList()
+  private var pickedPos: Int = -1
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LocationViewHolder {
     val v = LayoutInflater.from(parent.context).inflate(R.layout.item_location, parent, false)
     return LocationViewHolder(v).apply {
       itemView.setOnClickListener {
-        selectedItem = locItems[adapterPosition]
+        pickedPos = adapterPosition
         notifyDataSetChanged()
       }
     }
@@ -37,20 +31,30 @@ class LocationsAdapter : RecyclerView.Adapter<LocationsAdapter.LocationViewHolde
     holder.bind(locItems[position])
   }
 
+  fun setData(locItems: List<LocItem>, pickedPos: Int? = null) {
+    this.pickedPos = pickedPos ?: -1
+    this.locItems = locItems
+    notifyDataSetChanged()
+  }
+
+  fun getData(): Pair<List<LocItem>, Int> = Pair(locItems, pickedPos)
+
   inner class LocationViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
     fun bind(locItem: LocItem) = with(itemView) {
       with(locItem) {
         tvTitle.text = resources.getString(R.string.loc_title, placeName, country)
         tvCoords.text = resources.getString(R.string.loc_coords, latitude, longitude)
 
-        if(selectedItem == locItem) {
-          ivIcon.isSelected = true
-          tvTitle.isSelected = true
-          tvCoords.isSelected = true
-        } else {
-          ivIcon.isSelected = false
-          tvTitle.isSelected = false
-          tvCoords.isSelected = false
+        if(pickedPos != -1) {
+          if(locItem == locItems[pickedPos]) {
+            ivIcon.isSelected = true
+            tvTitle.isSelected = true
+            tvCoords.isSelected = true
+          } else {
+            ivIcon.isSelected = false
+            tvTitle.isSelected = false
+            tvCoords.isSelected = false
+          }
         }
       }
     }

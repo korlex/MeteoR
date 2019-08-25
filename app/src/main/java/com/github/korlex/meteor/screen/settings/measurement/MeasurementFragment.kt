@@ -15,6 +15,7 @@ import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.fragment_measurement.pressureWrapper
 import kotlinx.android.synthetic.main.fragment_measurement.speedWrapper
 import kotlinx.android.synthetic.main.fragment_measurement.tempWrapper
+import kotlinx.android.synthetic.main.fragment_measurement.toolbar
 import javax.inject.Inject
 
 class MeasurementFragment : BaseFragment() {
@@ -42,6 +43,7 @@ class MeasurementFragment : BaseFragment() {
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
+    toolbar.setNavBtnListener { fetchActivity().onBackPressed() }
     setupPressureUnits()
     setupSpeedUnits()
     setupTempUnits()

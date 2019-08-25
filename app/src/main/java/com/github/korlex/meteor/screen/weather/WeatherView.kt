@@ -1,9 +1,12 @@
 package com.github.korlex.meteor.screen.weather
 
+import com.github.korlex.meteor.exceptions.ForceLoadTimeThrowable
 import com.github.korlex.meteor.screen.weather.model.WeatherSchedule
 
 interface WeatherView {
-  fun showWeather2(weatherSchedule: WeatherSchedule)
-  fun showProgress2()
-  fun showError2()
+  fun showWeather(weatherSchedule: WeatherSchedule)
+  fun showProgress()
+  fun showError()
+  fun showErrorTimeForceLoad(throwable: ForceLoadTimeThrowable)
+  fun showErrorNetForceLoad()
 }

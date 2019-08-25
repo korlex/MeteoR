@@ -3,11 +3,20 @@
   <declare-styleable name="Toolbar">
     <attr name="titleText" format="string"/>
     <attr name="navBtn" format="reference"/>
-    <attr name="optionalBtn" format="reference"/>
+    <attr name="optionalBtn1" format="reference"/>
+    <attr name="optionalBtn2" format="reference"/>
   </declare-styleable>
 
   <declare-styleable name="SearchToolbar">
+    <attr name="searchBtn" format="reference"/>
     <attr name="hintText" format="string"/>
+    <attr name="optionalBtn" format="reference"/>
+    <attr name="filterQuery" format="string"/>
+  </declare-styleable>
+
+
+  <declare-styleable name="currTheme">
+    <attr name="currColor" format="reference"/>
   </declare-styleable>
 
 </resources>

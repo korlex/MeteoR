@@ -14,6 +14,7 @@ import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.fragment_color.btnBlue
 import kotlinx.android.synthetic.main.fragment_color.btnGreen
 import kotlinx.android.synthetic.main.fragment_color.btnRed
+import kotlinx.android.synthetic.main.fragment_color.toolbar
 import kotlinx.android.synthetic.main.fragment_color.tvBlueTitle
 import kotlinx.android.synthetic.main.fragment_color.tvGreenTitle
 import kotlinx.android.synthetic.main.fragment_color.tvRedTitle
@@ -39,6 +40,7 @@ class ColorFragment : BaseFragment() {
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
+    toolbar.setNavBtnListener { fetchActivity().onBackPressed() }
     setupBtnBlue()
     setupBtnGreen()
     setupBtnRed()

@@ -14,8 +14,10 @@ import com.github.korlex.meteor.BaseFragment
 import com.github.korlex.meteor.MainActivity
 import com.github.korlex.meteor.R
 import com.github.korlex.meteor.R.dimen
+import com.github.korlex.meteor.exceptions.ForceLoadTimeThrowable
 import com.github.korlex.meteor.extensions.fadeIn
 import com.github.korlex.meteor.extensions.fadeOut
+import com.github.korlex.meteor.extensions.getThemeColorResId
 import com.github.korlex.meteor.extensions.setIcon
 import com.github.korlex.meteor.preferences.MeteorPrefs
 import com.github.korlex.meteor.preferences.MeteorPrefs.Companion.HPA
@@ -30,13 +32,12 @@ import dagger.android.support.AndroidSupportInjection
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
-import kotlinx.android.synthetic.main.fragment_weather.content
-import kotlinx.android.synthetic.main.fragment_weather.layoutMsg
+import kotlinx.android.synthetic.main.fragment_weather.contentWrapper
+import kotlinx.android.synthetic.main.fragment_weather.layoutWarn
+import kotlinx.android.synthetic.main.fragment_weather.layoutWarnForceLoad
 import kotlinx.android.synthetic.main.fragment_weather.pbLoading
 import kotlinx.android.synthetic.main.fragment_weather.toolbar
 import kotlinx.android.synthetic.main.item_date.view.*
-import kotlinx.android.synthetic.main.layout_msg.btnMsgReload
-import kotlinx.android.synthetic.main.layout_msg.tvMsgText
 import kotlinx.android.synthetic.main.layout_w_bottom2.*
 import kotlinx.android.synthetic.main.layout_w_mid.rvTime
 import kotlinx.android.synthetic.main.layout_w_top.ivIcon
@@ -46,6 +47,10 @@ import kotlinx.android.synthetic.main.layout_w_top.tvMainTemp
 import kotlinx.android.synthetic.main.layout_w_top.tvPressure
 import kotlinx.android.synthetic.main.layout_w_top.tvSpeed
 import kotlinx.android.synthetic.main.layout_w_top.weatherWrapper
+import kotlinx.android.synthetic.main.layout_warn.btnWarnReload
+import kotlinx.android.synthetic.main.layout_warn.tvWarnText
+import kotlinx.android.synthetic.main.layout_warn_forceload.btnWarnForceLoadReload
+import kotlinx.android.synthetic.main.layout_warn_forceload.tvWarnForceLoadText
 import javax.inject.Inject
 
 class WeatherFragment : BaseFragment(), WeatherView {
@@ -78,9 +83,11 @@ class WeatherFragment : BaseFragment(), WeatherView {
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
     setupToolbar()
+    setupContentWrapper()
     setupTimeList()
-    setupLayoutMessage()
-    weatherPresenter.getWeather2(getString(R.string.locale))
+    setupWarnLayout()
+    setupWarnForceLoadLayout()
+    weatherPresenter.getWeather(getString(R.string.locale))
   }
 
   override fun onDestroy() {
@@ -93,27 +100,42 @@ class WeatherFragment : BaseFragment(), WeatherView {
     outState.putInt(SELECTED_DATE, selectedDatePosition)
   }
 
-  override fun showWeather2(weatherSchedule: WeatherSchedule) {
+  override fun showWeather(weatherSchedule: WeatherSchedule) {
     fillDatesSection2(weatherSchedule.dateItems)
     fillTimeSection(weatherSchedule.timeItems)
     onDateSelected(selectedDatePosition)
+    contentWrapper.isRefreshing = false
     pbLoading.fadeOut()
-    layoutMsg.fadeOut()
-    content.fadeIn()
+    layoutWarn.fadeOut()
+    contentWrapper.fadeIn()
   }
 
-  override fun showProgress2() {
-    layoutMsg.fadeOut()
-    content.fadeOut()
+  override fun showProgress() {
+    contentWrapper.fadeOut()
+    layoutWarn.fadeOut()
     pbLoading.fadeIn()
   }
 
-  override fun showError2() {
-    tvMsgText.text = getString(R.string.error_weather)
+  override fun showError() {
+    tvWarnText.text = getString(R.string.error_weather)
+    contentWrapper.isRefreshing = false
+    contentWrapper.fadeOut()
     pbLoading.fadeOut()
-    content.fadeOut()
-    layoutMsg.fadeIn()
+    layoutWarn.fadeIn()
   }
+
+  override fun showErrorTimeForceLoad(throwable: ForceLoadTimeThrowable) {
+    tvWarnForceLoadText.text = getString(R.string.warn_time_force_load, throwable.time)
+    contentWrapper.isRefreshing = false
+    contentWrapper.fadeOut()
+    layoutWarnForceLoad.fadeIn()
+  }
+
+  override fun showErrorNetForceLoad() {
+    tvWarnForceLoadText.text = getString(R.string.warn_net_force_load)
+    contentWrapper.isRefreshing = false
+    contentWrapper.fadeOut()
+    layoutWarnForceLoad.fadeIn()  }
 
   private fun showSettings() {
     (fetchActivity() as MainActivity).replaceFragment(SettingsFragment(), true)
@@ -121,8 +143,15 @@ class WeatherFragment : BaseFragment(), WeatherView {
 
   private fun setupToolbar() {
     with(toolbar) {
+      setOptionalBtn2Listener { showSettings() }
       setTitle(weatherPresenter.getPlaceName())
-      setOptionalBtnListener { showSettings() }
+    }
+  }
+
+  private fun setupContentWrapper() {
+    contentWrapper.apply {
+      setOnRefreshListener { weatherPresenter.getWeather(getString(R.string.locale), true) }
+      setColorSchemeResources(fetchActivity().getThemeColorResId(R.attr.colorPrimaryDark))
     }
   }
 
@@ -133,9 +162,16 @@ class WeatherFragment : BaseFragment(), WeatherView {
     }
   }
 
-  private fun setupLayoutMessage() {
-    btnMsgReload.setOnClickListener {
-      weatherPresenter.getWeather2(getString(R.string.locale))
+  private fun setupWarnLayout() {
+    btnWarnReload.setOnClickListener {
+      weatherPresenter.getWeather(getString(R.string.locale))
+    }
+  }
+
+  private fun setupWarnForceLoadLayout() {
+    btnWarnForceLoadReload.setOnClickListener {
+      layoutWarnForceLoad.fadeOut()
+      contentWrapper.fadeIn()
     }
   }
 
@@ -235,6 +271,7 @@ class WeatherFragment : BaseFragment(), WeatherView {
 
     datesWrapper.addView(view)
   }
+
 
   companion object { private const val SELECTED_DATE = "selected_date" }
 }

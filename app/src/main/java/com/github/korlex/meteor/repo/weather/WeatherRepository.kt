@@ -2,6 +2,10 @@ package com.github.korlex.meteor.repo.weather
 
 import com.github.korlex.meteor.api.MeteorService
 import com.github.korlex.meteor.api.model.weather.WeatherResponse
+import com.github.korlex.meteor.db.MeteorDb
+import com.github.korlex.meteor.db.model.ForecastDbModel
+import com.github.korlex.meteor.exceptions.ForceLoadNetThrowable
+import com.github.korlex.meteor.exceptions.ForceLoadTimeThrowable
 import com.github.korlex.meteor.preferences.MeteorPrefs
 import com.github.korlex.meteor.preferences.MeteorPrefs.Companion.CELSIUS
 import com.github.korlex.meteor.preferences.MeteorPrefs.Companion.FAHRENHEIT
@@ -20,28 +24,87 @@ import javax.inject.Inject
 
 class WeatherRepository @Inject constructor (
     private val meteorService: MeteorService,
-    private val meteoPrefs: MeteorPrefs) : WeatherDataSource {
+    private val meteoPrefs: MeteorPrefs,
+    private val meteorDb: MeteorDb) : WeatherDataSource {
 
   private val dateTimeFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
   private val dateFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("dd MMMM")
+  private var remainTimeToLoad: Long = NOT_SET
 
   override fun getLocation(): String = meteoPrefs.locName.get()
 
-  override fun getWeather2(locale: String): Single<WeatherSchedule> =
-      meteorService.getWeather(meteoPrefs.locId.get(), locale).map { forecastsToWeatherSchedule(it, locale) }
+  override fun getWeather(locale: String, forceLoad: Boolean): Single<WeatherSchedule> =
+      pickDataSource(meteoPrefs.locId.get(), locale, forceLoad).map { forecastsToWeatherSchedule(it, locale) }
 
-  private fun forecastsToWeatherSchedule(weatherResponse: WeatherResponse, locale: String): WeatherSchedule {
+  private fun pickDataSource(locationId: Int, locale: String, forceLoad: Boolean): Single<List<ForecastDbModel>> = when {
+    checkLocationChange(locationId) -> getUpdatedLocalData(locationId, locale)
+    checkLanguageChange(locale)     -> getUpdatedLocalData(locationId, locale)
+    checkLastUpdateTime()           -> getCurrentLocalData(forceLoad)
+    else                            -> getData(locationId, locale, forceLoad)
+  }
+
+  private fun checkLanguageChange(locale: String): Boolean = locale != meteoPrefs.loadLang.get()
+
+  private fun checkLocationChange(locId: Int): Boolean = locId != meteoPrefs.loadLocId.get()
+
+  private fun checkLastUpdateTime(): Boolean {
+    remainTimeToLoad = (TEN_MINUTES_IN_MS - (System.currentTimeMillis() - meteoPrefs.loadTime.get())) / ONE_MINUTE_IN_MS
+    return remainTimeToLoad > 0
+  }
+
+  private fun getUpdatedLocalData(locId: Int, locale: String): Single<List<ForecastDbModel>> =
+      meteorService
+          .getWeather(locId, locale)
+          .doOnSuccess {
+            saveRemoteLoadParams(locId, locale)
+            saveForecasts(it)
+          }
+          .flatMap { meteorDb.forecastDao().getForecasts() }
+
+  private fun getCurrentLocalData(forceLoad: Boolean): Single<List<ForecastDbModel>> =
+      meteorDb
+          .forecastDao()
+          .getForecasts()
+          .doOnSuccess { if(forceLoad) throw ForceLoadTimeThrowable(remainTimeToLoad) }
+
+  private fun getData(locId: Int, locale: String, forceLoad: Boolean): Single<List<ForecastDbModel>> =
+      getUpdatedLocalData(locId, locale)
+          .onErrorResumeNext { if(!forceLoad) getCurrentLocalData(false) else throw ForceLoadNetThrowable() }
+
+  private fun saveForecasts(weatherResponse: WeatherResponse) {
+    meteorDb.forecastDao().replaceForecasts(weatherResponse.list.map {
+      ForecastDbModel(
+          it.dtTxt,
+          it.dt,
+          it.main.humidity,
+          it.main.pressure,
+          it.main.temp,
+          it.weather.first().description,
+          it.weather.first().icon,
+          it.weather.first().id,
+          it.weather.first().main,
+          it.wind.speed)
+    })
+  }
+
+  private fun saveRemoteLoadParams(locId: Int, locale: String) {
+    meteoPrefs.loadLocId.set(locId)
+    meteoPrefs.loadTime.set(System.currentTimeMillis())
+    meteoPrefs.loadLang.set(locale)
+  }
+
+  private fun forecastsToWeatherSchedule(forecasts: List<ForecastDbModel>, locale: String): WeatherSchedule {
     val timeItems: MutableList<MutableList<TimeItem>> = mutableListOf()
     val dateItems: MutableList<DateItem> = mutableListOf()
-    var datePrev: LocalDate = LocalDate.parse(weatherResponse.list.first().dtTxt, dateTimeFormatter)
-    weatherResponse.list.forEach {
+    var datePrev: LocalDate = LocalDate.parse(forecasts.first().dtTxt, dateTimeFormatter)
+    forecasts.forEach {
       val date = LocalDate.parse(it.dtTxt, dateTimeFormatter)
       val time = LocalTime.parse(it.dtTxt, dateTimeFormatter)
-      val airPressure = convertPressure(it.main.pressure)
-      val temperature = convertTemp(it.main.temp)
-      val windSpeed = convertSpeed(it.wind.speed)
-      val weatherState = WeatherState(it.weather.first().id, it.weather.first().description)
-      val timeItem = TimeItem(time.hour, weatherState, temperature, airPressure, windSpeed, it.main.humidity)
+      val airPressure = convertPressure(it.mainPressure)
+      val temperature = convertTemp(it.mainTemp)
+      val windSpeed = convertSpeed(it.windSpeed)
+      val weatherState = WeatherState(it.weatherId, it.weatherDesc)
+      val timeItem = TimeItem(time.hour, weatherState, temperature, airPressure, windSpeed, it.mainHumidity)
       if (date != datePrev) {
         dateItems.add(createDateItem(datePrev, timeItems.last(), locale))
         timeItems.add(mutableListOf(timeItem))
@@ -75,20 +138,25 @@ class WeatherRepository @Inject constructor (
   private fun convertPressure(value: Double): Int = when(meteoPrefs.pressureUnit.get()) {
     HPA  -> value.toInt()
     MMHG -> (value / 1.333).toInt()
-    else -> throw IllegalArgumentException("Unknown pressure units")
+    else -> throw IllegalArgumentException("Unknown mainPressure units")
   }
 
   private fun convertSpeed(value: Double): Int = when(meteoPrefs.speedUnit.get()) {
     MS   -> value.toInt()
     MH   -> (value * 2.237).toInt()
-    else -> throw IllegalArgumentException("Unknown speed units")
+    else -> throw IllegalArgumentException("Unknown windSpeed units")
   }
 
   private fun convertTemp(value: Double) = when(meteoPrefs.tempUnit.get()) {
     KELVIN     -> value.toInt()
     CELSIUS    -> (value - 273.15).toInt()
     FAHRENHEIT -> ((value - 273.15) * 9 / 5 + 32).toInt()
-    else       -> throw IllegalArgumentException("Unknown temp units")
+    else       -> throw IllegalArgumentException("Unknown mainTemp units")
   }
 
+  companion object {
+   private const val TEN_MINUTES_IN_MS = 600000L
+   private const val ONE_MINUTE_IN_MS = 60000L
+   private const val NOT_SET = -1L
+  }
 }

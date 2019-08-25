@@ -12,6 +12,7 @@
       android:id="@+id/searchToolbar"
       android:layout_width="match_parent"
       android:layout_height="56dp"
+      app:searchBtn="@drawable/ic_back"
       app:hintText="@string/search_hint"
       app:cardElevation="4dp"/>
 
@@ -53,8 +54,8 @@
       android:visibility="visible"/>
 
   <include
-      layout="@layout/layout_msg"
-      android:id="@+id/layoutMsg"
+      layout="@layout/layout_warn"
+      android:id="@+id/layoutWarn"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       android:visibility="gone"/>

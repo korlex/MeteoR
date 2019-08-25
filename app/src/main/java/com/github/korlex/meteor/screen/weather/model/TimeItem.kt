@@ -1,7 +1,5 @@
 package com.github.korlex.meteor.screen.weather.model
 
-import org.threeten.bp.LocalTime
-
 data class TimeItem(
     val hour: Int,
     val state: WeatherState,

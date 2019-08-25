@@ -22,4 +22,6 @@
 
   <color name="red_f44336">#f44336</color>
   <color name="green_8bc34a">#8bc34a</color>
+
+  <color name="test">?attr/colorPrimaryDark</color>
 </resources>

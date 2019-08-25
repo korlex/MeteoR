@@ -1,9 +1,11 @@
 package com.github.korlex.meteor
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
 import com.github.korlex.meteor.preferences.MeteorPrefs
 import com.github.korlex.meteor.preferences.MeteorPrefs.Companion.FOREST_GREEN
@@ -53,6 +55,16 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
       layoutBrandLaunch.visibility = View.GONE
 
     }
+  }
+
+  private fun closeKeyboard(): Boolean {
+    val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+    return imm.hideSoftInputFromWindow(currentFocus?.windowToken,0)
+  }
+
+
+  fun goBack() {
+    if(!closeKeyboard()) onBackPressed()
   }
 
   fun showWeather() {

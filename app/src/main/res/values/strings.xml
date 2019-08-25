@@ -76,4 +76,12 @@
   <string name="green">Forest green</string>
   <string name="blue">Ocean blue</string>
 
+  <string name="warn_time_force_load">Weather data updates not so frequently. Reload will be available in %1$d minutes.</string>
+  <string name="warn_net_force_load">An error occurred while loading weather data. Try to check your internet connection</string>
+
+  <string name="return_back">Return back</string>
+
+  <string name="permission_error">Permission to access location is required</string>
+  <string name="network_error">No internet connection</string>
+
 </resources>

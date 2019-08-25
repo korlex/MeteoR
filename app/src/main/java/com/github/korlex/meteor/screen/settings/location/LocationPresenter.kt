@@ -11,22 +11,51 @@ class LocationPresenter(
     private val view: LocationView,
     private val dataSource: LocationDataSource) : BasePresenter() {
 
-  fun getResultByQuery(query: String) {
+  fun getResultByCoord(lat: Double, lon: Double) {
     view.showProgress()
     dataSource
-        .getLocations(query)
+        .getLocationsByCoord(lat, lon)
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
-        .subscribe(this::onSuccess, this::onError)
+        .subscribe(this::onSuccessRemote, this::onError)
         .addTo(disposables)
   }
 
-  fun saveLocation(placeId: Int, placeName: String) {
-    dataSource.saveLocation(placeId, placeName)
+  fun getLocationsRemote(query: String? = null) {
+    view.showProgress()
+    dataSource
+        .getLocationsByQuery(query)
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe(this::onSuccessRemote, this::onError)
+        .addTo(disposables)
   }
 
-  private fun onSuccess(locItems: List<LocItem>) {
-    if (!locItems.isEmpty()) view.showLocations(locItems) else view.showEmpty()
+  fun getLocationsDb() {
+    view.showProgress()
+    dataSource
+        .getLocationsFromDb()
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe(this::onSuccessDb, this::onError)
+        .addTo(disposables)
+  }
+
+
+  fun saveLocations(locations: List<LocItem>, pickedPosition: Int) {
+    with(dataSource) {
+      val pickedItem = locations[pickedPosition]
+      savePickedLocation(pickedItem.placeId, pickedItem.placeName, pickedPosition)
+      saveSearchedLocations(locations)
+    }
+  }
+
+  private fun onSuccessRemote(locItems: List<LocItem>) {
+    if (locItems.isNotEmpty()) view.showLocationsRemote(locItems) else view.showEmpty()
+  }
+
+  private fun onSuccessDb(locItems: List<LocItem>) {
+    if (locItems.isNotEmpty()) view.showLocationsDb(locItems) else view.showEmpty()
   }
 
   private fun onError(throwable: Throwable) {

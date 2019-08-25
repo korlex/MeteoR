@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <dimen name="default_text_size">14sp</dimen>
+  <dimen name="default_padding">16dp</dimen>
   <dimen name="default_separator_size">0.5dp</dimen>
   <dimen name="indent_small">8dp</dimen>
   <dimen name="indent_mid">16dp</dimen>

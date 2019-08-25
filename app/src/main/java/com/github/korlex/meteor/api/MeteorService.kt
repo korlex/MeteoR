@@ -10,11 +10,16 @@ import retrofit2.http.Query
 
 interface MeteorService {
 
-    @GET("data/2.5/find?$API_KEY_QUERY")
-    fun getLocations(@Query("q") loc: String?): Single<LocationResponse>
+  @GET("data/2.5/find?$API_KEY_QUERY")
+  fun getLocationsByQuery(@Query("q") loc: String?): Single<LocationResponse>
 
-    @GET("data/2.5/forecast?$API_KEY_QUERY")
-    fun getWeather(
-        @Query("id") id: Int,
-        @Query("lang") lang: String): Single<WeatherResponse>
+  @GET("data/2.5/find?$API_KEY_QUERY")
+  fun getLocationsByCoord(
+      @Query("lat") lat: Double,
+      @Query("lon") lon: Double): Single<LocationResponse>
+
+  @GET("data/2.5/forecast?$API_KEY_QUERY")
+  fun getWeather(
+      @Query("id") id: Int,
+      @Query("lang") lang: String): Single<WeatherResponse>
 }
