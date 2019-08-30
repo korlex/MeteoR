@@ -1,7 +1,6 @@
 package com.github.korlex.meteor.api
 
 import com.github.korlex.meteor.api.MeteorApi.API_KEY_QUERY
-import com.github.korlex.meteor.api.MeteorApi.UNITS_METRIC
 import com.github.korlex.meteor.api.model.location.LocationResponse
 import com.github.korlex.meteor.api.model.weather.WeatherResponse
 import io.reactivex.Single

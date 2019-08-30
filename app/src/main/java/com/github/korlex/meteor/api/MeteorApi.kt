@@ -11,7 +11,6 @@ object MeteorApi {
 
   const val BASE_URL = "http://api.openweathermap.org/"
   const val API_KEY_QUERY = "appid=d3cc778955204610e79d2e2517e3a453"
-  const val UNITS_METRIC = "units=metric"
 
   fun createMeteorService(context: Context): MeteorService {
     val okHttpClient = OkHttpClient.Builder()

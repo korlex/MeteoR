@@ -11,7 +11,7 @@ import javax.inject.Singleton
 class RetrofitModule {
   @Provides
   @Singleton
-  fun provideDentapplService(context: Context): MeteorService {
+  fun provideMeteorService(context: Context): MeteorService {
     return MeteorApi.createMeteorService(context)
   }
 }
